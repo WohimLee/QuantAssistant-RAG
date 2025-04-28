@@ -1,0 +1,22 @@
+
+# foders
+res
+output
+result
+__pycache__
+test
+Test
+cache
+量化云API文档说明
+
+# files
+*.pt
+*.pth
+*.pkl
+*.pdf
+*.o
+*.DS_Store
+test.py
+rewrite.py
+embedding
+vocab.json
