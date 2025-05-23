@@ -1,0 +1,42 @@
+{
+    "基础使用": {
+        "files": ["quick_start.md", "strategy_quick_start.md"],
+        "questions": [1, 10],
+        "keywords": ["安装", "配置", "入门", "注册", "登录"]
+    },
+    "数据获取": {
+        "files": ["data_api_stock.md", "data_api_bond.md", "data_api_fund.md", "data_api_future.md", "data_api_general.md"],
+        "questions": [11, 20],
+        "keywords": ["数据", "行情", "财务", "基本面"]
+    },
+    "策略开发": {
+        "files": ["strategy_api.md", "strategy_structures.md", "strategy_variables.md", "strategy_architecture.md"],
+        "questions": [21, 30],
+        "keywords": ["策略", "开发", "编写", "实现"]
+    },
+    "回测系统": {
+        "files": ["backtest.md"],
+        "questions": [31, 40],
+        "keywords": ["回测", "参数", "结果", "分析"]
+    },
+    "风险管理": {
+        "files": ["strategy_api.md"],
+        "questions": [41, 50],
+        "keywords": ["风险", "止损", "止盈", "仓位"]
+    },
+    "实盘交易": {
+        "files": ["trade_api.md"],
+        "questions": [51, 60],
+        "keywords": ["交易", "下单", "持仓", "账户"]
+    },
+    "因子研究": {
+        "files": ["factor_api.md"],
+        "questions": [121, 130],
+        "keywords": ["因子", "IC", "收益", "暴露"]
+    },
+    "行情数据": {
+        "files": ["quote_api.md", "quote_basic_api.md"],
+        "questions": [211, 220],
+        "keywords": ["行情", "tick", "K线", "实时"]
+    }
+} 

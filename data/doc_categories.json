@@ -1,0 +1,50 @@
+{
+    "基础功能": {
+        "files": ["quick_start.md", "strategy_quick_start.md"],
+        "description": "平台基础功能和入门指南",
+        "sub_categories": ["安装配置", "基本概念", "快速入门"]
+    },
+    "数据接口": {
+        "files": [
+            "data_api_stock.md",
+            "data_api_bond.md", 
+            "data_api_fund.md",
+            "data_api_future.md",
+            "data_api_general.md",
+            "data_api_fin_base.md"
+        ],
+        "description": "各类数据获取接口",
+        "sub_categories": ["股票数据", "债券数据", "基金数据", "期货数据", "通用数据", "财务数据"]
+    },
+    "策略开发": {
+        "files": [
+            "strategy_api.md",
+            "strategy_structures.md",
+            "strategy_variables.md",
+            "strategy_architecture.md",
+            "strategy_enums_consts.md"
+        ],
+        "description": "策略开发相关接口和框架",
+        "sub_categories": ["策略框架", "API接口", "变量定义", "枚举常量"]
+    },
+    "交易接口": {
+        "files": [
+            "trade_api.md",
+            "quote_api.md",
+            "quote_basic_api.md",
+            "basket_order.md"
+        ],
+        "description": "交易和行情相关接口",
+        "sub_categories": ["交易API", "行情API", "篮子委托"]
+    },
+    "回测系统": {
+        "files": ["backtest.md"],
+        "description": "回测系统相关接口",
+        "sub_categories": ["回测配置", "回测分析"]
+    },
+    "因子研究": {
+        "files": ["factor_api.md"],
+        "description": "因子研究相关接口",
+        "sub_categories": ["因子API", "因子分析"]
+    }
+} 
