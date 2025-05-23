@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pydantic
+transformers
+faiss-cpu
+sqlalchemy
+pymongo
+scikit-learn
+numpy
+pandas
+jieba
+pytest
+httpx 
