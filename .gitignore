@@ -1,4 +1,3 @@
-
 # foders
 res
 output
@@ -20,3 +19,69 @@ test.py
 rewrite.py
 embedding
 vocab.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 虚拟环境
+venv/
+env/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 日志
+logs/
+*.log
+
+# 数据
+data/raw/*
+data/processed/*
+data/vector_store/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/vector_store/.gitkeep
+
+# 环境变量
+.env
+.env.*
+!.env.example
+
+# 模型文件
+models/
+*.pt
+*.pth
+*.bin
+
+# 前端
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/.env.*.local
+
+# 系统文件
+.DS_Store
+Thumbs.db
