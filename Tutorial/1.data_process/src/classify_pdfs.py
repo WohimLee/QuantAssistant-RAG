@@ -3,14 +3,9 @@ import shutil
 from langdetect import detect
 from PyPDF2 import PdfReader
 
-'''
-把拿到的一个包含中英文 pdf 的文件夹里面的 pdf
-按照中文、英文分出来
-'''
-
-SRC_FOLDER = "/home/buding/haqian/data/Quantitative Trading"  # 要扫描的源目录
-MIN_TEXT_LEN = 50  # 文本长度阈值，小于则视为未识别/扫描件
-MAX_PAGES = 5      # 只读取前 N 页
+SRC_FOLDER = "/home/buding/haqian/data/Quantitative Trading"
+MIN_TEXT_LEN = 50
+MAX_PAGES = 5
 
 def extract_text_from_pdf(pdf_path, max_pages=MAX_PAGES):
     """只提取前 max_pages 页文本"""
@@ -20,19 +15,17 @@ def extract_text_from_pdf(pdf_path, max_pages=MAX_PAGES):
         for i, page in enumerate(reader.pages):
             if i >= max_pages:
                 break
-            # 某些页可能提取不到文本（如扫描件）
-            page_text = page.extract_text() or ""
-            text += page_text
+            text += page.extract_text() or ""
     except Exception as e:
         print(f"无法读取文件 {pdf_path}: {e}")
     return text
 
 def detect_language(text):
-    """检测文本语言，优先识别中文/英文，其他返回 unknown"""
+    """检测文本语言，返回 zh / en / unknown"""
     if not text or len(text.strip()) < MIN_TEXT_LEN:
         return "unknown"
     try:
-        lang = detect(text)  # 可能返回 'zh-cn','zh-tw','en','ja' 等
+        lang = detect(text)
         if lang.startswith("zh"):
             return "zh"
         elif lang == "en":
@@ -43,7 +36,7 @@ def detect_language(text):
         return "unknown"
 
 def ensure_unique_path(dst_path):
-    """若目标文件已存在，自动追加计数避免覆盖"""
+    """若目标文件存在则自动重命名"""
     if not os.path.exists(dst_path):
         return dst_path
     base, ext = os.path.splitext(dst_path)
@@ -54,58 +47,69 @@ def ensure_unique_path(dst_path):
             return candidate
         idx += 1
 
-def classify_pdfs(src_folder):
-    # 目标根目录：与源目录同级
+def classify_files(src_folder):
+    # 创建目标根目录，与源目录同级
     parent_dir = os.path.dirname(src_folder.rstrip(os.sep))
     dest_root = os.path.join(parent_dir, "PDF_Sorted")
 
-    chinese_folder = os.path.join(dest_root, "Chinese_PDFs")
-    english_folder = os.path.join(dest_root, "English_PDFs")
-    unknown_folder = os.path.join(dest_root, "Unknown_PDFs")
+    # 定义分类子文件夹
+    folder_map = {
+        "doc": os.path.join(dest_root, "doc"),
+        "docx": os.path.join(dest_root, "docx"),
+        "pdf_zh": os.path.join(dest_root, "pdf", "zh"),
+        "pdf_en": os.path.join(dest_root, "pdf", "en"),
+        "pdf_unknown": os.path.join(dest_root, "pdf", "unknown"),
+        "xlsx": os.path.join(dest_root, "xlsx"),
+        "csv": os.path.join(dest_root, "csv"),
+    }
 
-    # 创建目标目录
-    os.makedirs(chinese_folder, exist_ok=True)
-    os.makedirs(english_folder, exist_ok=True)
-    os.makedirs(unknown_folder, exist_ok=True)
+    # 创建所有目标文件夹
+    for path in folder_map.values():
+        os.makedirs(path, exist_ok=True)
 
-    # 为了安全：不扫描目标根目录（尽管与源目录同级，仍加此判断以防万一）
     def is_under_dest(path):
         try:
             return os.path.commonpath([os.path.abspath(path), os.path.abspath(dest_root)]) == os.path.abspath(dest_root)
         except ValueError:
             return False
 
+    # 遍历源目录
     for root, _, files in os.walk(src_folder):
-        # 跳过目标目录（理论上不会走到，但以防软链接等情况）
         if is_under_dest(root):
             continue
 
         for file in files:
-            if not file.lower().endswith(".pdf"):
-                continue
+            ext = os.path.splitext(file)[1].lower()
+            src_path = os.path.join(root, file)
 
-            pdf_path = os.path.join(root, file)
-            print(f"正在分析: {pdf_path}")
+            if ext == ".pdf":
+                print(f"正在分析 PDF: {src_path}")
+                text = extract_text_from_pdf(src_path)
+                lang = detect_language(text)
 
-            text = extract_text_from_pdf(pdf_path)
-            lang = detect_language(text)
-
-            if lang == "zh":
-                target_dir = chinese_folder
-                hint = "→ 复制到 Chinese_PDFs"
-            elif lang == "en":
-                target_dir = english_folder
-                hint = "→ 复制到 English_PDFs"
+                if lang == "zh":
+                    dst_dir = folder_map["pdf_zh"]
+                elif lang == "en":
+                    dst_dir = folder_map["pdf_en"]
+                else:
+                    dst_dir = folder_map["pdf_unknown"]
+            elif ext == ".doc":
+                dst_dir = folder_map["doc"]
+            elif ext == ".docx":
+                dst_dir = folder_map["docx"]
+            elif ext == ".xlsx":
+                dst_dir = folder_map["xlsx"]
+            elif ext == ".csv":
+                dst_dir = folder_map["csv"]
             else:
-                target_dir = unknown_folder
-                hint = "→ 复制到 Unknown_PDFs（未识别或扫描件）"
+                continue  # 其他文件类型跳过
 
-            dst_path = ensure_unique_path(os.path.join(target_dir, file))
+            dst_path = ensure_unique_path(os.path.join(dst_dir, file))
             try:
-                shutil.copy2(pdf_path, dst_path)
-                print(hint)
+                shutil.copy2(src_path, dst_path)
+                print(f"→ 复制到: {dst_path}")
             except Exception as e:
-                print(f"复制失败 {pdf_path} -> {dst_path}: {e}")
+                print(f"复制失败 {src_path}: {e}")
 
 if __name__ == "__main__":
-    classify_pdfs(SRC_FOLDER)
+    classify_files(SRC_FOLDER)
