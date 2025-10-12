@@ -61,6 +61,7 @@ def classify_files(src_folder):
         "pdf_unknown": os.path.join(dest_root, "pdf", "unknown"),
         "xlsx": os.path.join(dest_root, "xlsx"),
         "csv": os.path.join(dest_root, "csv"),
+        "txt": os.path.join(dest_root, "txt")
     }
 
     # 创建所有目标文件夹
@@ -101,6 +102,8 @@ def classify_files(src_folder):
                 dst_dir = folder_map["xlsx"]
             elif ext == ".csv":
                 dst_dir = folder_map["csv"]
+            elif ext == ".txt":
+                dst_dir = folder_map["txt"]
             else:
                 continue  # 其他文件类型跳过
 
