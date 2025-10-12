@@ -50,7 +50,7 @@ def ensure_unique_path(dst_path):
 def classify_files(src_folder):
     # 创建目标根目录，与源目录同级
     parent_dir = os.path.dirname(src_folder.rstrip(os.sep))
-    dest_root = os.path.join(parent_dir, "PDF_Sorted")
+    dest_root = os.path.join(parent_dir, "Sorted_files")
 
     # 定义分类子文件夹
     folder_map = {
