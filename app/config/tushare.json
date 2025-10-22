@@ -1,0 +1,61 @@
+{
+    "token": "fce8f09d9763b2cc31301464e0dbf8b9706286ffa29a62b5f8d9ed5c",
+    "api接口服务": {
+        "股票数据": {
+            "基础数据": {
+                "股票列表": "stock_basic",
+                "上市公司基本信息": "stock_company",
+                "上市公司管理层": "stk_managers",
+                "管理层薪酬和持股": "stk_rewards",
+                "IPO新股列表": "new_share"
+            },
+            "行情数据": {
+                "实时日线": "rt_k",
+                "实时分钟": "rt_min",
+                "历史分钟": "stk_mins",
+                "日线行情": "daily",
+                "周线行情": "weekly",
+                "月线行情": "monthly"
+            },
+            "财务数据": {
+                "利润表": "income",
+                "资产负债表": "balancesheet",
+                "现金流量表": "cashflow",
+                "业绩预告": "forecast",
+                "业绩快报": "express",
+                "分红送股": "dividend",
+                "财务指标数据": "fina_indicator",
+                "财务审计意见": "fina_audit",
+                "主营业务构成": "fina_mainbz",
+                "财报披露计划": "disclosure_date"
+            },
+            "参考数据": {
+                "前十大股东": "top10_holders",
+                "前十大流通股东": "top10_floatholders",
+                "股权质押统计数据": "pledge_stat",
+                "股权质押明细": "pledge_detail",
+                "股票回购": "repurchase",
+                "限售股解禁": "share_float",
+                "大宗交易": "block_trade",
+                "股东人数": "stk_holdernumber",
+                "股东增减持": "stk_holdertrade"
+            },
+            "资金流向数据": {
+                "个股资金流向": "moneyflow",
+                "个股资金流向（同花顺）": "moneyflow_ths",
+                "板块资金流向（同花顺）": "moneyflow_cnt_ths",
+                "行业资金流向（同花顺）": "moneyflow_ind_ths",
+                "个股资金流向（东方财富）": "moneyflow_dc",
+                "板块资金流向（东方财富）": "moneyflow_ind_dc",
+                "大盘资金流向（东方财富）": "moneyflow_mkt_dc",
+                "沪深港通资金流向": "moneyflow_hsgt"
+            },
+            "打板专题数据": {
+
+            }
+        }
+    }
+
+
+}
+
