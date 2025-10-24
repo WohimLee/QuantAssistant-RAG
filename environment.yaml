@@ -1,0 +1,14 @@
+name: quant
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+
+  - pip
+  - pip:
+      - streamlit>=1.36
+      - networkx>=3.2
+      - pyvis>=0.3.2
+      - neo4j>=5.14
+      - -i https://pypi.tuna.tsinghua.edu.cn/simple

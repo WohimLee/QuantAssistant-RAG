@@ -6,7 +6,7 @@ industry	str	Y	所属行业
 fullname	str	N	股票全称
 enname	str	N	英文全称
 cnspell	str	Y	拼音缩写
-market	str	Y	市场类型（主板/创业板/科创板/CDR）
+market	str	Y	市场类型
 exchange	str	N	交易所代码
 curr_type	str	N	交易货币
 list_status	str	N	上市状态 L上市 D退市 P暂停上市
