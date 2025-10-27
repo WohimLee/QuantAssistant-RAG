@@ -1,3 +1,5 @@
+
+import pandas as pd
 from neo4j import GraphDatabase
 
 def connect():
@@ -52,6 +54,8 @@ def create_nodes_tx(tx, labels_cypher, items):
 
 if __name__ == "__main__":
 
+    stock_list = "app/data/tushare_data/stock_list_2025-10-24_17_51.csv"
+    stock_list_df = pd.read_csv(stock_list)
 
 
     pass
